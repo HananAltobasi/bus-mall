@@ -1,0 +1,37 @@
+body {
+    background-image:url('https://cdn.allwallpaper.in/wallpapers/1024x768/11198/stars-galaxies-1024x768-wallpaper.jpg');
+    
+}
+  header {
+    text-align: center;
+    color: #ced7dd;;
+    margin-bottom: 40px;
+  }
+  header nav ul {
+    list-style: none;
+  }
+  header nav ul li {
+    display: inline-block;
+    padding: 20px;
+  }
+  header nav ul li a {
+    color: #f1f1f1;
+    font-size: 25px;
+    font-weight: 100;
+  }
+  header nav ul li a:hover {
+    color: #366646;
+  }
+  #imagesSection {
+    max-width: 90%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  img {
+    width: 250px;
+    height: 250px;
+    border: 10px solid #811818;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+  }
