@@ -14,13 +14,17 @@ function Products(name){
     this.views=0;
     this.votes=0;
     this.path=`./img1/${name}.jpg`;
-    this.numberOfRounds=0;
     Products.all.push(this);
 }
+// array img
 Products.all=[];
 for(let i=0;i<names.length;i++){
     new Products(names[i]);
 }
+function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 //[0,1,2,....,19]
  function render(){
    const leftIndex=randomNumber(0,Products.all.length-1);
@@ -28,39 +32,62 @@ for(let i=0;i<names.length;i++){
    leftImg.src=leftRandomProducts.path;
    leftImg.title=leftRandomProducts.name;
    leftImg.alt=leftRandomProducts.name;
+   leftRandomProducts.views++;
 
    const centerIndex=randomNumber(0,Products.all.length-1);
+   if(centerIndex != leftIndex){
    const centerRandomProducts=Products.all[centerIndex];
    centerImg.src=centerRandomProducts.path;
    centerImg.title=centerRandomProducts.name;
    centerImg.alt=centerRandomProducts.name;
-
+   centerRandomProducts.views++;
+   }
     const rightIndex=randomNumber(0,Products.all.length-1);
+    if(rightIndex != leftIndex && rightIndex != centerIndex){
     const rightRandomProducts=Products.all[rightIndex];
     rightImg.src=rightRandomProducts.path;
     rightImg.title=rightRandomProducts.name;
     rightImg.alt=rightRandomProducts.name;
+    rightRandomProducts.views++;
+    }
 }
+render();
+//event
+ let uservotes=alert('Please choose the product you like :)');
+ let ListResult=document.getElementById('ListResult');
+ let rounds=25;
+ let counter=0;
+
  imgSection.addEventListener('click',clickHandler);
 
  function clickHandler(event){
     if (event.target.id === 'leftImg' || event.target.id === 'centerImg' || event.target.id === 'rightImg'){
       for(let i=0;i<Products.all.length;i++){
-        Products.all[i].numberOfRounds++;
-        if(Products.all[i].numberOfRounds===25){
-            leftImg.removeEventListener('click',clickHandler);
-            centerImg.removeEventListener('click',clickHandler);
-            rightImg.removeEventListener('click',clickHandler);
-          }
         if (Products.all[i].name === event.target.title){
             Products.all[i].votes++;
-          console.table(Products.all[i])
+            counter++;
+          console.table(Products.all[i]);
         }
       }
-      render();
     }
-}    
-function randomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+      render();
+
+    if(counter===rounds){
+      imgSection.removeEventListener('click',clickHandler);
+      let button=document.createElement('button');
+      ListResult.appendChild(button);
+      button.textContent='Results';
+      ListResult.addEventListener('click',ShowResults);
+      
+      function ShowResults(event){
+      let list=document.getElementById('list');
+      let ul=document.createElement('ul');
+      list.appendChild(ul);
+       for(let i=0;i<Products.all.length;i++){
+        let li=document.createElement('li');
+        ul.appendChild(li);
+        li.textContent=Products.all[i].name +' had '+ Products.all[i].votes +' votes, and was seen '+ Products.all[i].views+ ' times.';
+       }
+      }
+    }
   }
-  render();
