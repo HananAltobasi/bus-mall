@@ -35,3 +35,14 @@ body {
     margin: 10px;
     border-radius: 5px;
   }
+  button{
+    width: 60px;
+    height: 40px;
+  }
+  #list ul li{
+    font-size: large;
+    color: rgb(233, 231, 238);
+  }
+  #list ul li:hover{
+  color: #cf8383;
+  }
