@@ -15,7 +15,7 @@ body {
     padding: 20px;
   }
   header nav ul li a {
-    color: #f1f1f1;
+    color: rgb(247, 206, 206);
     font-size: 25px;
     font-weight: 100;
   }
@@ -30,7 +30,7 @@ body {
   img {
     width: 250px;
     height: 250px;
-    border: 10px solid #811818;
+    border: 10px solid hsl(0, 69%, 30%);
     padding: 10px;
     margin: 10px;
     border-radius: 5px;
@@ -43,6 +43,6 @@ body {
     font-size: large;
     color: rgb(233, 231, 238);
   }
-  #list ul li:hover{
-  color: #cf8383;
+  #list ul li:nadi{
+  color: rgb(207, 131, 131);
   }
