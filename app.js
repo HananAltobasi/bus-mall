@@ -73,21 +73,30 @@ render();
       render();
 
     if(counter===rounds){
-      imgSection.removeEventListener('click',clickHandler);
-      let button=document.createElement('button');
-      ListResult.appendChild(button);
-      button.textContent='Results';
-      ListResult.addEventListener('click',ShowResults);
-      
+      imgSection.removeEventListener('Chart',clickHandler);
+      ShowResults();
+    }      
       function ShowResults(event){
-      let list=document.getElementById('list');
-      let ul=document.createElement('ul');
-      list.appendChild(ul);
-       for(let i=0;i<Products.all.length;i++){
-        let li=document.createElement('li');
-        ul.appendChild(li);
-        li.textContent=Products.all[i].name +' had '+ Products.all[i].votes +' votes, and was seen '+ Products.all[i].views+ ' times.';
-       }
+      let CCart=document.getElementById('CChart');
+      let CChart={
+      
+      type:'bar',
+      data:{
+        label:'views',
+     datasets:[{
+       backgroundColor:'#3cb44b',
+       data:'views',
+     },
+    {
+     label:'votes',
+     data:'votes',
+    }]
       }
+
+      }
+      let chart = new Chart(CCart, CChart);
+
+      }
+
     }
-  }
+  

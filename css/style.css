@@ -43,6 +43,6 @@ body {
     font-size: large;
     color: rgb(233, 231, 238);
   }
-  #list ul li:hover{
+  #list ul li:nadi{
   color: #cf8383;
   }
