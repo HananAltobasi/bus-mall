@@ -57,15 +57,16 @@ render();
  let ListResult=document.getElementById('ListResult');
  let rounds=25;
  let counter=0;
-
  imgSection.addEventListener('click',clickHandler);
 
  function clickHandler(event){
+  
+  counter+=1;
+
     if (event.target.id === 'leftImg' || event.target.id === 'centerImg' || event.target.id === 'rightImg'){
       for(let i=0;i<Products.all.length;i++){
         if (Products.all[i].name === event.target.title){
             Products.all[i].votes++;
-            counter++;
           console.table(Products.all[i]);
         }
       }
@@ -73,30 +74,49 @@ render();
       render();
 
     if(counter===rounds){
-      imgSection.removeEventListener('Chart',clickHandler);
-      ShowResults();
-    }      
-      function ShowResults(event){
-      let CCart=document.getElementById('CChart');
-      let CChart={
-      
-      type:'bar',
-      data:{
-        label:'views',
-     datasets:[{
-       backgroundColor:'#3cb44b',
-       data:'views',
-     },
-    {
-     label:'votes',
-     data:'votes',
-    }]
-      }
+      imgSection.removeEventListener('click',clickHandler);
+      alert('you are out of click :)')
+      creatchart();
+    }
+  }
+  function creatchart(){
+    let context = document.getElementById('myChart').getContext('2d');
+    let productName=[];
+    let productVotes=[];
+    let productViews=[];
+    for(let i=0;i<Products.all.length;i++){
+      productName.push(Products.all[i].name);
+    }
+    for(let i=0;i<Products.all.length;i++){
+      productVotes.push(Products.all[i].votes);
+    }
+    for(let i=0;i<Products.all.length;i++){
+      productViews.push(Products.all[i].views);
+    }
+    let chartObject={
+      type: 'bar',
 
-      }
-      let chart = new Chart(CCart, CChart);
-
-      }
-
+      // The data for our dataset
+      data: {
+          labels: productName,
+          datasets: [{
+              label: 'number of votes',
+              backgroundColor: 'rgb(88, 63, 63)',
+              borderColor: 'rgb(255, 99, 132)',
+              data: productVotes,
+            },
+            {
+            label: 'number of Views',
+            backgroundColor: 'rgb(247, 206, 206)',
+            borderColor: 'rgb(129, 24, 24)',
+            data: productViews,
+          }],
+      },
+  
+      // Configuration options go here
+      options:{}
+        
     }
   
+    let chart = new Chart(context,chartObject);
+  }
