@@ -24,6 +24,7 @@ for(let i=0;i<names.length;i++){
 function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+randomNumber();
 
 //[0,1,2,....,19]
  function render(){
@@ -113,10 +114,19 @@ render();
           }],
       },
   
-      // Configuration options go here
-      options:{}
-        
     }
-  
+    local();
+
     let chart = new Chart(context,chartObject);
+  }
+
+  function local(){
+    let ProductsMall=JSON.stringify(Products.all);
+    localStorage.setItem('Data',ProductsMall);
+  }
+  function data(){
+    let allData =localStorage.getItem('Data');
+    if(allData){
+      Products.all=JSON.parse(allData);
+    }
   }
